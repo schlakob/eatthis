@@ -10,7 +10,7 @@
             <div class="card-body">
             <h3 class="card-title"><a href="/recipes/{{$recipe->id}}">{{$recipe->title}}</a></h3>
                 <p class="card-test">{{$recipe->description}}</p>
-                <small>Written on: {{$recipe->created_at}}</small>
+                <small>Last update on: {{$recipe->created_at}} by {{$recipe->user->name}}</small>
             </div>
         </div>
         {{$recipes->links()}}

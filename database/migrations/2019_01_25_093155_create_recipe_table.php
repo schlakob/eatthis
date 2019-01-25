@@ -18,7 +18,7 @@ class CreateRecipeTable extends Migration
                 $table->string('title');
                 $table->longText('description');
                 $table->longText('ingredients');
-                $table->integer('created_user_id');
+                $table->integer('user_id');
                 $table->timestamps();
             });
     }

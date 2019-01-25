@@ -40,15 +40,14 @@ class RecipeController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'ingredients' => 'required',
-            'created_user_id' => 'required'
+            'ingredients' => 'required'
         ]);
 
         $recipe = new Recipe;
         $recipe->title = $request->input('title');
         $recipe->description = $request->input('description');
         $recipe->ingredients = $request->input('ingredients');
-        $recipe->created_user_id = $request->input('created_user_id');
+        $recipe->user_id = auth()->user()->id;
         $recipe->save();
 
         return redirect('/recipes')->with('success', 'Added a new Recipe');
@@ -74,7 +73,8 @@ class RecipeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $recipe = Recipe::find($id);
+        return view('recipes/edit', compact('recipe'));
     }
 
     /**
@@ -86,7 +86,21 @@ class RecipeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'ingredients' => 'required'
+        ]);
+
+        $recipe = Recipe::find($id);
+        $recipe->title = $request->input('title');
+        $recipe->description = $request->input('description');
+        $recipe->ingredients = $request->input('ingredients');
+        $recipe->user_id = auth()->user()->id;
+        $recipe->save();
+
+        $redirectPage = '/recipes'.'/'.$id;
+        return redirect($redirectPage)->with('success', 'Edited the Recipe');
     }
 
     /**
@@ -97,6 +111,8 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $recipe = Recipe::find($id);
+        $recipe->delete();
+        return redirect('/recipes')->with('success', 'Deleted the Recipe');
     }
 }

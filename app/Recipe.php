@@ -9,5 +9,8 @@ class Recipe extends Model
     protected $table = 'recipe';
     public $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['title', 'description', 'ingredients', 'created_user_id'];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

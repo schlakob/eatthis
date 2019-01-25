@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class LoggedInController extends Controller
 {
@@ -21,8 +22,10 @@ class LoggedInController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function control()
+    public function dashboard()
     {
-        return view('pages.control');
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('pages/dashboard')->with('recipes', $user->recipes);
     }
 }
