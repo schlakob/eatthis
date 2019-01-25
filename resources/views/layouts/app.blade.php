@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('about') }}">About</a>
                         </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/recipes">Recipes</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,6 +81,7 @@
         </nav>
 
         <main class="container py-4">
+            @include('inc.messages')
             @yield('content')
         </main>
     </div>

@@ -17,3 +17,5 @@ Auth::routes();
 
 Route::get('/control', 'LoggedInController@control')->name('control');
 Route::get('/about', 'PagesController@about')->name('about');
+
+Route::resource('recipes', 'RecipeController');
