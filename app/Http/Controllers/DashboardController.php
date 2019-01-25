@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class LoggedInController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,7 +22,7 @@ class LoggedInController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function dashboard()
+    public function index()
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);

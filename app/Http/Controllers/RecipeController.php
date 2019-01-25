@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class RecipeController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,6 +84,11 @@ class RecipeController extends Controller
     public function edit($id)
     {
         $recipe = Recipe::find($id);
+
+        if (auth()->user()->id !== $recipe->user_id) {
+            return redirect('/recipes')->with('error', 'That is not your Recipe');
+        }
+
         return view('recipes/edit', compact('recipe'));
     }
 
@@ -112,6 +127,11 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
+
+        if (auth()->user()->id !== $recipe->user_id) {
+            return redirect('/recipes')->with('error', 'That is not your Recipe');
+        }
+
         $recipe->delete();
         return redirect('/recipes')->with('success', 'Deleted the Recipe');
     }

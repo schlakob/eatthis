@@ -15,7 +15,7 @@ Route::get('/', 'PagesController@index');
 
 Auth::routes();
 
-Route::get('/dashboard', 'LoggedInController@dashboard');
+Route::get('/dashboard', 'DashboardController@index');
 Route::get('/about', 'PagesController@about');
 
 Route::resource('recipes', 'RecipeController');
