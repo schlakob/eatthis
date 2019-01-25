@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Recipes</h1>
-    <a href="/recipes/create" class="btn btn-primary mb-2">Create</a>
+    <a href="/recipes/create" class="btn btn-primary btn-block mb-2">Create new Recipe</a>
 
     @if (count($recipes) > 0)
         @foreach ($recipes as $recipe)

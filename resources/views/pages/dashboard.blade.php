@@ -3,10 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center"><h3>Your Recipes</h3></div>
-
                 <div class="card-body">
                     <a href="/recipes/create" class="btn btn-primary btn-block mb-2">Create new recipe</a>
                     @if (count($recipes) > 0)
