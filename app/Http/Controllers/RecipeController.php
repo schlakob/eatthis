@@ -137,4 +137,15 @@ class RecipeController extends Controller
         }
         return redirect('/recipes')->with('success', 'Deleted the Recipe');
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function copy($id)
+    {
+        $recipe = Recipe::find($id);
+        return view('recipes/copy', compact('recipe'));
+    }
 }

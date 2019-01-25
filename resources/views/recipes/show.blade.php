@@ -20,16 +20,20 @@
     <div class="row">
     @if (!Auth::guest())
          @if (Auth::user()->id == $recipe->user_id)
-            <div class="col-6">
+            <div class="col-4">
                 <a href="/recipes/{{$recipe->id}}/edit" class="btn btn-secondary btn-block">Edit</a>
             </div>
 
-            <div class="col-6">
+            <div class="col-4">
             {!! Form::open(['action' => ['RecipeController@destroy', $recipe->id], 'method' => 'POST', 'class' => '']) !!}
                 {{Form::hidden('_method', 'DELETE')}}
                 {{Form::submit('Delete', ['class' => 'btn btn-danger btn-block '])}}
             {!! Form::close() !!}</div>
+
         @endif
+        <div class="col-12">
+            <a href="/recipes/copy/{{$recipe->id}}" class="btn btn-secondary btn-block">Copy to your recipes</a>
+        </div>
     @endif
     </div>
 
