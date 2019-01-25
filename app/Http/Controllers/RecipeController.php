@@ -48,7 +48,7 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|string|min:3|max:255',
             'description' => 'required',
             'ingredients' => 'required'
         ]);
@@ -102,7 +102,7 @@ class RecipeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|string|min:3|max:255',
             'description' => 'required',
             'ingredients' => 'required'
         ]);
