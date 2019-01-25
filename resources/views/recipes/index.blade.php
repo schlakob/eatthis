@@ -1,21 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Recipes</h1>
-    <a href="/recipes/create" class="btn btn-primary btn-block mb-2">Create new Recipe</a>
+    <h1>All Recipes</h1>
+    <a href="/recipes/create" class="btn btn-primary btn-block mb-3">Create new recipe</a>
 
     @if (count($recipes) > 0)
-        @foreach ($recipes as $recipe)
-        <div class="card mb-2">
-            <div class="card-body">
-            <h3 class="card-title"><a href="/recipes/{{$recipe->id}}">{{$recipe->title}}</a></h3>
-                <p class="card-test">{{$recipe->description}}</p>
-                <small>Last update on: {{$recipe->created_at}} by {{$recipe->user->name}}</small>
+        <div class="list-group">
+            @foreach ($recipes as $recipe)
+            <div class="row">
+                <a href="/recipes/{{$recipe->id}}" class="list-group-item flex-column align-items-start list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div class="col-8">
+                            <h5 class="mb-1 text-primary font-weight-bold">{{$recipe->title}}</h5>
+                        </div>
+                        <div class="col-4">
+                            <small>Last update on: <span class="text-primary">{{$recipe->created_at}}</span> by <span class="text-primary">{{$recipe->user->name}}</span></small>
+                        </div>
+                    </div>
+                </a>
             </div>
+
+            @endforeach
         </div>
-        {{$recipes->links()}}
-        @endforeach
     @else
         <p>No Recipes found</p>
     @endif
+    <a href="/recipes/create" class="btn btn-primary btn-block mt-3 mb-4">Create new recipe</a>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            {{$recipes->links()}}
+        </div>
+    </div>
+
 @endsection

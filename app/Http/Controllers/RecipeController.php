@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Recipe;
-
+use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -60,7 +60,7 @@ class RecipeController extends Controller
         $recipe->user_id = auth()->user()->id;
         $recipe->save();
 
-        return redirect('/recipes')->with('success', 'Added a new Recipe');
+        return redirect('/dashboard')->with('success', 'Added a new Recipe');
     }
 
     /**
@@ -127,12 +127,14 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
-
         if (auth()->user()->id !== $recipe->user_id) {
             return redirect('/recipes')->with('error', 'That is not your Recipe');
         }
 
         $recipe->delete();
+        if (str_replace(url('/'), '', url()->previous()) == '/dashboard') {
+            return redirect('/dashboard')->with('success', 'Deleted the Recipe');
+        }
         return redirect('/recipes')->with('success', 'Deleted the Recipe');
     }
 }
