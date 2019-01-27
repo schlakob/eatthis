@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row mb-4">
+    <div class="row mb-5">
         <div class="col-6">
             <a href="/dashboard" class="btn btn-primary btn-block">go to your dashboard</a>
         </div>
@@ -10,18 +10,33 @@
         </div>
     </div>
     <h1>{{$recipe->title}}</h1>
+    <hr>
     <input type="hidden" id="allIngredients" value="{{$recipe->ingredients}}" readonly>
-    <table id="ingredients-table" class="table table-striped">
-        <thead>
-            <tr>
-                <td>Amount</td>
-                <td>Unit</td>
-                <td>Ingredient</td>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-7">
+            <div class="card ">
+                <div class="card-header text-center"><h4>Ingredients</h4></div>
+                <div class="card-body">
+                    <table id="ingredients-table" class="table table-striped">
+                        <tr></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+                <div class="card ">
+                    <div class="card-header text-center"><h4>Calculator</h4></div>
+                    <div class="card-body text-center">
+                        <p>Here you can calculate the portions for a specific amount of people, but is not functional right now (coming soon):</p>
+                        <div class="row justify-content-center">
+                            <button class="btn btn-primary col-2 mr-3">+</button>
+                            <input type="number" class="form-control col-2" value="1">
+                            <button class="btn btn-danger col-2 ml-3">-</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
     <hr>
     <p>{{$recipe->description}}</p>
     <hr>
