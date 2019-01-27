@@ -148,4 +148,12 @@ class RecipeController extends Controller
         $recipe = Recipe::find($id);
         return view('recipes/copy', compact('recipe'));
     }
+
+    public function delete($id){
+        $recipe = Recipe::find($id);
+        if (auth()->user()->id !== $recipe->user_id) {
+            return redirect('/recipes')->with('error', 'That is not your Recipe');
+        }
+        $recipe->delete();
+    }
 }

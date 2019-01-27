@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/about', 'PagesController@about');
 
-Route::get('/recipes/copy/{id}', 'RecipeController@copy');
-Route::resource('/recipes', 'RecipeController');
+Route::get('recipes/copy/{id}', 'RecipeController@copy');
+Route::delete('recipes/delete/{id}','RecipeController@delete');
+Route::resource('recipes', 'RecipeController');
 
