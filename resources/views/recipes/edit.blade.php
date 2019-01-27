@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Edit the Recipe</h1>
+    <input type="hidden" id="allIngredients" value="{{$recipe->ingredients}}" readonly>
     {!! Form::open(['action' => ['RecipeController@update', $recipe->id], 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::label('title', 'Title:')}}
@@ -9,13 +10,22 @@
         </div>
         <div class="form-group">
                 {{Form::label('ingredients', 'Ingredients:')}}
-                {{Form::textarea('ingredients', $recipe->ingredients, ['class' => 'form-control', 'placeholder' => 'Ingredients'])}}
+                <table id="ingredients-table">
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
+                {{Form::button('+' , ['id' => 'addButton', 'class' => 'btn btn-primary'])}}
+                {{Form::hidden('ingredients', '', ['class' => 'form-control', 'id' => 'json-ing'])}}
         </div>
         <div class="form-group">
                 {{Form::label('description', 'Description:')}}
                 {{Form::textarea('description', $recipe->description, ['class' => 'form-control', 'placeholder' => 'Description'])}}
         </div>
         {{Form::hidden('_method', 'PUT')}}
-        {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+        {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
+    @include('inc/ingredients')
+    @include('inc/unitSelect')
+    @include('inc/loadIngredients')
 @endsection

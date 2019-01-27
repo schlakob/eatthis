@@ -17,7 +17,7 @@
             <div class="card ">
                 <div class="card-header text-center"><h4>Ingredients</h4></div>
                 <div class="card-body">
-                    <table id="ingredients-table" class="table table-striped">
+                    <table id="ingredients-table" class="table table">
                         <tr></tr>
                     </table>
                 </div>
@@ -67,10 +67,10 @@
             $array = JSON.parse($('#allIngredients').val());
             for (let i = 0; i < $array.length; i++) {
                 const element = $array[i];
-                $('#ingredients-table tr:last').after('<tr>' +
-                '<td>'+element['amount']+'</td>' +
-                '<td>'+element['unit']+'</td>' +
-                '<td>'+element['ingredient']+'</td>' +
+                $('#ingredients-table tr:last').after('<tr class="row">' +
+                '<td class="col-4 text-right">'+element['amount']+'</td>' +
+                '<td class="col-2">'+element['unit']+'</td>' +
+                '<td class="col-6">'+element['ingredient']+'</td>' +
                 '</tr>');
             }
         });

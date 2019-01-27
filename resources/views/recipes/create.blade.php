@@ -16,7 +16,7 @@
                             {{Form::text('amount', '', ['class' => 'form-control', 'placeholder' => 'Amount'])}}
                         </td>
                         <td>
-                            {!!Form::select('unit', ['g' => 'gramms', 'ml' => 'ml', 'l' => 'liter'], null ,  ['class' => 'form-control', 'placeholder' => 'Unit'])!!}
+                            {!!Form::select('unit', ['g' => 'g', 'ml' => 'ml', 'l' => 'l'], null ,  ['class' => 'form-control'])!!}
                         </td>
                         <td>
                             {{Form::text('ingredient', '', ['class' => 'form-control', 'placeholder' => 'Ingredient'])}}
@@ -33,33 +33,6 @@
         </div>
         {{Form::submit('Create', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#addButton').click(function(){
-                $('#ingredients-table tr:last').after('<tr>' +
-                '<td>{{Form::text('amount', '', ['class' => 'form-control', 'placeholder' => 'Amount'])}}</td>' +
-                '<td>{!!Form::select('unit', ['g' => 'gramms', 'ml' => 'ml', 'l' => 'liter'], null ,  ['class' => 'form-control', 'placeholder' => 'Unit'])!!}</td>' +
-                '<td>{{Form::text('ingredient', '', ['class' => 'form-control', 'placeholder' => 'Ingredient'])}}</td>' +
-                '</tr>');
-            });
-            $('#createButton').click(function(){
-                $counter = 0;
-                $allIngredients = $("#ingredients-table :input" ).serializeArray();
-                $result = [];
-                for (let i = 0; i < $allIngredients.length; i=i+3) {
-                    const amount = $allIngredients[i].value;
-                    const unit = $allIngredients[i+1].value;
-                    const ingredient = $allIngredients[i+2].value;
-                    $result.push({
-                        "amount" : amount,
-                        "unit" : unit,
-                        "ingredient"  : ingredient
-                    });
-                }
-                alert(JSON.stringify($result));
-                $('#json-ing').val(JSON.stringify($result));
-            });
-        });
+    @include('inc/ingredients')
 
-    </script>
 @endsection

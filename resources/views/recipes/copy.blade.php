@@ -9,12 +9,21 @@
         </div>
         <div class="form-group">
                 {{Form::label('ingredients', 'Ingredients:')}}
-                {{Form::textarea('ingredients', $recipe->ingredients, ['class' => 'form-control', 'placeholder' => 'Ingredients'])}}
+                <table id="ingredients-table">
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
+                {{Form::button('+' , ['id' => 'addButton', 'class' => 'btn btn-primary'])}}
+                {{Form::hidden('ingredients', '', ['class' => 'form-control', 'id' => 'json-ing'])}}
         </div>
         <div class="form-group">
                 {{Form::label('description', 'Description:')}}
-                {{Form::textarea('description', $recipe->ingredients, ['class' => 'form-control', 'placeholder' => 'Description'])}}
+                {{Form::textarea('description', $recipe->description, ['class' => 'form-control', 'placeholder' => 'Description'])}}
         </div>
-        {{Form::submit('Copy', ['class' => 'btn btn-primary'])}}
+        {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
+    @include('inc/ingredients')
+    @include('inc/unitSelect')
+    @include('inc/loadIngredients')
 @endsection
