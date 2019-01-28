@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron text-center">
-        <h1 class="font-weight-bold">Welcome to EatThis
-            @auth{{ Auth::user()->name }} @endauth </h1>
+    <div class="text-center">
+        <h1 class="font-weight-bold"> @auth Welcome to EatThis, <span class="text-primary">{{ Auth::user()->name }}</span>! @else Welcome to EatThis! @endauth </h1>
         <hr>
         <p> This ist the easy way to mange your cookingplans. You can look for other recipes, make your own and even make you a plan for the next days. <br>
              If you want you can take a look to the latest <a href="/recipes">recipes</a>.</p>

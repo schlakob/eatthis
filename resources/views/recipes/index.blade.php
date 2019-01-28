@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>All Recipes</h1>
+    <h1 class="text-center font-weight-bold mb-2">All Recipes</h1>
+    <hr>
     <a href="/recipes/create" class="btn btn-primary btn-block mb-3">Create new recipe</a>
 
     @if (count($recipes) > 0)

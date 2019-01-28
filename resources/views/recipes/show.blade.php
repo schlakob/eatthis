@@ -9,7 +9,7 @@
             <a href="/recipes" class="btn btn-primary btn-block">go to all recipes</a>
         </div>
     </div>
-    <h1>{{$recipe->title}}</h1>
+    <h1 class="text-center font-weight-bold">{{$recipe->title}}</h1>
     <hr>
     <input type="hidden" id="allIngredients-show" value="{{$recipe->ingredients}}" readonly>
     <div class="row">

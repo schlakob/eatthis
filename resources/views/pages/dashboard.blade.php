@@ -2,10 +2,30 @@
 
 @section('content')
 <div class="container">
+    <h1 class="text-center font-weight-bold mb-2">Your dashboard</h1>
+    <hr>
+    <div class="row mb-3">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header text-center"><h3>Generate your weekly</h3></div>
+                    <div class="card-body text-center">
+                        <p class="text-danger">Coming soon</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header text-center"><h3>Your settings</h3></div>
+                        <div class="card-body text-center">
+                            <p class="text-danger">Coming soon</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header text-center"><h3>Your Recipes</h3></div>
+                <div class="card-header text-center"><h3>Your recipes</h3></div>
                 <div class="card-body">
                     <a href="/recipes/create" class="btn btn-primary btn-block mb-3">Create new recipe</a>
                     @if (count($recipes) > 0)
