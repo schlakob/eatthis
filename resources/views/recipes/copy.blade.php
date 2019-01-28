@@ -23,7 +23,4 @@
         </div>
         {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
-    @include('inc/ingredients')
-    @include('inc/unitSelect')
-    @include('inc/loadIngredients')
 @endsection

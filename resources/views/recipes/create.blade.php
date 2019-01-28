@@ -33,6 +33,4 @@
         </div>
         {{Form::submit('Create', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
-    @include('inc/ingredients')
-
 @endsection

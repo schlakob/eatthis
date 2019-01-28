@@ -31,23 +31,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.deleteButton').click( function(e) {
-        e.preventDefault();
-        $id = $(this).find('.recipeId').val();
-        $.ajax({
-            type: 'DELETE',
-            url: "{!! url('recipes/delete' ) !!}" + "/" + $id,
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "id": $id
-            },
-            success: function (data) {
-                $('#table-row-'+ $id).remove();
-            }
-        });
-   });
-});
-</script>
 @endsection

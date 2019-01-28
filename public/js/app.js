@@ -47956,6 +47956,116 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+$(document).ready(function () {
+  /**
+   * This Method creates on "#addBuuton" press a new line for ingredients
+   *
+   * @requriements:    "#addbutton" (Button which needs to be clicked)
+   *                  "#ingredients-tabel" (Table for the new line of ingredients)(at least one tr required in table)
+   * */
+  $('#addButton').click(function () {
+    $('#ingredients-table tr:last').after('<tr>' + '<td><input type="text" name="amount" placeholder="Amount" class="form-control"></td>' + '<td>' + generateSelect('none') + '</td>' + '<td><input type="text" name="ingredient" placeholder="Ingredient" class="form-control"></td>' + '</tr>');
+  });
+  /**
+   * This Method creates on "#createButton" press a JSON which should be stored in the DB
+   *
+   * @requriements:   "#createButton" (Button which needs to be clicked)
+   *                  "#ingredients-tabel" (Table for all the ingredients)
+   *                  "#json-ing" (hidden input field for the complete JSON-String)
+   * */
+
+  $('#createButton').click(function () {
+    var allIngredients = $("#ingredients-table :input").serializeArray();
+    var result = [];
+
+    for (var i = 0; i < allIngredients.length; i = i + 3) {
+      var amount = allIngredients[i].value;
+      var unit = allIngredients[i + 1].value;
+      var ingredient = allIngredients[i + 2].value;
+      result.push({
+        "amount": amount,
+        "unit": unit,
+        "ingredient": ingredient
+      });
+    }
+
+    $('#json-ing').val(JSON.stringify(result));
+  });
+  /**
+   * This Method creates the dropdown for units of the ingredients
+   *
+   * @param:  the preselected value of the units,
+   *          if no unit shoud be selected give 'none' as param
+   * */
+
+  function generateSelect(selected) {
+    var result = '<select name="unit" class="form-control">';
+    var options = ["g", "ml", "l"];
+    options.forEach(function (element) {
+      if (element == selected) {
+        result += '<option selected="selected" value="' + element + '">' + element + '</option>';
+      }
+
+      result += '<option value="' + element + '">' + element + '</option>';
+    });
+    result += '</select>';
+    return result;
+  }
+  /**
+   * This Method creates the list of the ingredients on the show or copy or edit page
+   *
+   * @requriements:   "#ingredients-tabel" (Table for the new lines of ingredients)
+   *                  "#ingredients-edit" or "#ingredients-show" (hidden input field for the JSON-String from the DB)
+   * */
+
+
+  if ($('#allIngredients-edit').val()) {
+    var array = JSON.parse($('#allIngredients-edit').val());
+
+    for (var i = 0; i < array.length; i++) {
+      var element = array[i];
+      $('#ingredients-table tr:last').after('<tr>' + '<td><input type="text" name="amount" class="form-control" value="' + element['amount'] + '"></td>' + '<td>' + generateSelect(element['unit']) + '</td>' + '<td><input type="text" name="ingredient" class="form-control" value="' + element['ingredient'] + '"></td>' + '</tr>');
+    }
+  }
+
+  if ($('#allIngredients-show').val()) {
+    var array = JSON.parse($('#allIngredients-show').val());
+
+    for (var _i = 0; _i < array.length; _i++) {
+      var _element = array[_i];
+      $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-4 text-right">' + _element['amount'] + '</td>' + '<td class="col-2">' + _element['unit'] + '</td>' + '<td class="col-6">' + _element['ingredient'] + '</td>' + '</tr>');
+    }
+  }
+  /**
+   * This Method sends an ajax call to delete a specific recipe
+   *
+   * @requriements:   ".deleteButton" (Button to activate this method)
+   *                  ".recipeId" (to get the recipe id whch needs to be deleted)
+   *                  "'#table-row-'+ id" (to remove the tablerow of the recipe)
+   * */
+
+
+  $('.deleteButton').click(function (e) {
+    e.preventDefault();
+    var id = $(this).find('.recipeId').val();
+    console.dir(id);
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      type: 'DELETE',
+      url: "recipes/delete/" + id,
+      data: {
+        "id": id
+      },
+      success: function success(data) {
+        $('#table-row-' + id).remove();
+      }
+    });
+  });
+});
 
 /***/ }),
 

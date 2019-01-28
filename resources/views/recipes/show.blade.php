@@ -11,7 +11,7 @@
     </div>
     <h1>{{$recipe->title}}</h1>
     <hr>
-    <input type="hidden" id="allIngredients" value="{{$recipe->ingredients}}" readonly>
+    <input type="hidden" id="allIngredients-show" value="{{$recipe->ingredients}}" readonly>
     <div class="row">
         <div class="col-7">
             <div class="card ">
@@ -62,17 +62,4 @@
         @endif
     @endif
     </div>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $array = JSON.parse($('#allIngredients').val());
-            for (let i = 0; i < $array.length; i++) {
-                const element = $array[i];
-                $('#ingredients-table tr:last').after('<tr class="row">' +
-                '<td class="col-4 text-right">'+element['amount']+'</td>' +
-                '<td class="col-2">'+element['unit']+'</td>' +
-                '<td class="col-6">'+element['ingredient']+'</td>' +
-                '</tr>');
-            }
-        });
-    </script>
 @endsection

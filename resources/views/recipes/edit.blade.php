@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit the Recipe</h1>
-    <input type="hidden" id="allIngredients" value="{{$recipe->ingredients}}" readonly>
+    <input type="hidden" id="allIngredients-edit" value="{{$recipe->ingredients}}" readonly>
     {!! Form::open(['action' => ['RecipeController@update', $recipe->id], 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::label('title', 'Title:')}}
@@ -25,7 +25,4 @@
         {{Form::hidden('_method', 'PUT')}}
         {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
     {!! Form::close() !!}
-    @include('inc/ingredients')
-    @include('inc/unitSelect')
-    @include('inc/loadIngredients')
 @endsection
