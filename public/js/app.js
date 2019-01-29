@@ -47964,7 +47964,7 @@ $(document).ready(function () {
    *                  "#ingredients-tabel" (Table for the new line of ingredients)(at least one tr required in table)
    * */
   $('#addButton').click(function () {
-    $('#ingredients-table tr:last').after('<tr>' + '<td><input type="text" name="amount" placeholder="Amount" class="form-control"></td>' + '<td>' + generateSelect('none') + '</td>' + '<td><input type="text" name="ingredient" placeholder="Ingredient" class="form-control"></td>' + '<td><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' + '</tr>');
+    $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-3"><input type="number" name="amount" step="0.1" placeholder="Amount" class="form-control"></td>' + '<td class="col-3">' + generateSelect('none') + '</td>' + '<td class="col-5"><input type="text" name="ingredient" placeholder="Ingredient" class="form-control"></td>' + '<td class="col-1"><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' + '</tr>');
   });
   /**
    * This Method removes on ".deleteIngredientLine" press the line of ingredients
@@ -48009,7 +48009,7 @@ $(document).ready(function () {
 
   function generateSelect(selected) {
     var result = '<select name="unit" class="form-control">';
-    var options = ["g", "ml", "l"];
+    var options = ["g", "piece(s)", "ml", "cm", "half", "teaspoon(s)", "eating spoon(s)", "prise(s)", "cup(s)", "can(s)", "bottle(s)", "bag(s)", "leaf(s)", "bundle(s)"];
     options.forEach(function (element) {
       if (element == selected) {
         result += '<option selected="selected" value="' + element + '">' + element + '</option>';
@@ -48033,16 +48033,20 @@ $(document).ready(function () {
 
     for (var i = 0; i < array.length; i++) {
       var element = array[i];
-      $('#ingredients-table tr:last').after('<tr>' + '<td><input type="text" name="amount" class="form-control" value="' + element['amount'] + '"></td>' + '<td>' + generateSelect(element['unit']) + '</td>' + '<td><input type="text" name="ingredient" class="form-control" value="' + element['ingredient'] + '"></td>' + '<td><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' + '</tr>');
+      $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-3"><input type="number" name="amount" step="0.1" class="form-control" value="' + element['amount'] + '"></td>' + '<td class="col-3">' + generateSelect(element['unit']) + '</td>' + '<td class="col-5"><input type="text" name="ingredient" class="form-control" value="' + element['ingredient'] + '"></td>' + '<td class="col-1"><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' + '</tr>');
     }
   }
 
   if ($('#allIngredients-show').val()) {
+    showIngredients(1);
+  }
+
+  function showIngredients(multiplier) {
     var array = JSON.parse($('#allIngredients-show').val());
 
     for (var _i = 0; _i < array.length; _i++) {
       var _element = array[_i];
-      $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-4 text-right">' + _element['amount'] + '</td>' + '<td class="col-2">' + _element['unit'] + '</td>' + '<td class="col-6">' + _element['ingredient'] + '</td>' + '</tr>');
+      $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-4 text-right">' + _element['amount'] * multiplier + '</td>' + '<td class="col-2">' + _element['unit'] + '</td>' + '<td class="col-6">' + _element['ingredient'] + '</td>' + '</tr>');
     }
   }
   /**
@@ -48073,6 +48077,38 @@ $(document).ready(function () {
         $('#table-row-' + id).remove();
       }
     });
+  });
+  /**
+   * This Methods increses or decreses the shown quantity of the ingredients
+   *
+   * @requriements:   ".#addCalculatedPerson" or ".#removeCalculatedPerson"(Button to activate this method)
+   *                  ".#ingredients-table" (to display the ingredients)
+   *                  "#calculatedPersons" (textfield with the current amount of persons)
+   * */
+
+  $('#addCalculatedPerson').click(function () {
+    var calculatedPersons = $('#calculatedPersons');
+
+    if (calculatedPersons.val() < 20) {
+      calculatedPersons.val(function (i, oldval) {
+        return ++oldval;
+      });
+      $("#ingredients-table tr").remove();
+      $("#ingredients-table").append('<tr></tr>');
+      showIngredients(calculatedPersons.val());
+    }
+  });
+  $('#removeCalculatedPerson').click(function () {
+    var calculatedPersons = $('#calculatedPersons');
+
+    if (calculatedPersons.val() > 1) {
+      calculatedPersons.val(function (i, oldval) {
+        return --oldval;
+      });
+      $("#ingredients-table tr").remove();
+      $("#ingredients-table").append('<tr></tr>');
+      showIngredients(calculatedPersons.val());
+    }
   });
 });
 

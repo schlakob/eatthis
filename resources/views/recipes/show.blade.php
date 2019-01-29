@@ -29,9 +29,9 @@
                     <div class="card-body text-center">
                         <p>Here you can calculate the portions for a specific amount of people, but is not functional right now (coming soon):</p>
                         <div class="row justify-content-center">
-                            <button class="btn btn-primary col-2 mr-3">+</button>
-                            <input type="number" class="form-control col-2" value="1">
-                            <button class="btn btn-danger col-2 ml-3">-</button>
+                            <button class="btn btn-primary col-2 mr-3" id="addCalculatedPerson">+</button>
+                            <input type="number" id="calculatedPersons" class="form-control col-2 text-center" value="1" readonly max="20" min="1">
+                            <button class="btn btn-danger col-2 ml-3" id="removeCalculatedPerson">-</button>
                         </div>
                     </div>
                 </div>
