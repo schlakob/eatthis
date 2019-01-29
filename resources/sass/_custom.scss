@@ -1,5 +1,12 @@
 // space for custom css adjustments
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
 $primary: #35682d;
 $secondary: #4b4b4b;
+$dark: #4b4b4b;
 $danger: #781f19;
+$enable-rounded: false;
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+}

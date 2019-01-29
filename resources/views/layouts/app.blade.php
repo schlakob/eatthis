@@ -39,12 +39,13 @@
                             <a class="nav-link" href="/about">About</a>
                         </li>
                         <li class="nav-item">
-                                <a class="nav-link" href="/recipes">All Recipes</a>
+                                <a class="nav-link" href="/recipes">All recipes</a>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <a href="/recipes/create" class="btn btn-primary mr-3">Create new recipe</a>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

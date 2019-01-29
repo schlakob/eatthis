@@ -32,7 +32,7 @@
                     <table class="table table-striped" id='table'>
                         @foreach ($recipes as $recipe)
                         <tr class="row" id="table-row-{{$recipe->id}}">
-                                <td class="col-6 pt-4 text-truncate"><a href="/recipes/{{$recipe->id}}" class="text-primary font-weight-bold">{{$recipe->title}}</a></td>
+                                <td class="col-6 pt-4 text-truncate"><a href="/recipes/{{$recipe->id}}" class="text-secondary font-weight-bold">{{$recipe->title}}</a></td>
                                 <td class="col-3"><a href="/recipes/{{$recipe->id}}/edit" class="btn btn-secondary btn-block">Edit the Recipe</a></td>
                                 <td class="col-3">
                                     {!! Form::open(['onsubmit' => 'return false', 'class' => 'deleteButton']) !!}
