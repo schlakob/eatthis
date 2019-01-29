@@ -9,7 +9,7 @@
             {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
         </div>
         <div class="form-group">
-            {{Form::label('ingredients', 'Ingredients (please typ in the quantity for 1 person):')}}
+            {{Form::label('ingredients', 'Ingredients (please type in the quantity for 1 person):')}}
             <table id="ingredients-table">
                 <tbody>
                     <tr></tr>
