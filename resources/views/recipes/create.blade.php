@@ -11,6 +11,7 @@
             {{Form::label('ingredients', 'Ingredients:')}}
             <table id="ingredients-table">
                 <tbody>
+                    <tr></tr>
                     <tr>
                         <td>
                             {{Form::text('amount', '', ['class' => 'form-control', 'placeholder' => 'Amount'])}}
@@ -20,6 +21,9 @@
                         </td>
                         <td>
                             {{Form::text('ingredient', '', ['class' => 'form-control', 'placeholder' => 'Ingredient'])}}
+                        </td>
+                        <td>
+                            {{Form::button('-', ['class' => 'btn btn-danger deleteIngredientLine ml-1'])}}
                         </td>
                     </tr>
                 </tbody>

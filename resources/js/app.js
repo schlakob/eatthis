@@ -34,6 +34,7 @@ const app = new Vue({
 
 $(document).ready(function(){
 
+
     /**
      * This Method creates on "#addBuuton" press a new line for ingredients
      *
@@ -45,8 +46,18 @@ $(document).ready(function(){
         '<td><input type="text" name="amount" placeholder="Amount" class="form-control"></td>' +
         '<td>'+generateSelect('none')+'</td>' +
         '<td><input type="text" name="ingredient" placeholder="Ingredient" class="form-control"></td>' +
+        '<td><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' +
         '</tr>');
     });
+
+    /**
+     * This Method removes on ".deleteIngredientLine" press the line of ingredients
+     *
+     * @requriements:    ".deleteIngredientLine" (Button which needs to be clicked)
+     * */
+    $(document).on( "click", ".deleteIngredientLine", function(e) {
+        $(this).closest('tr').remove();
+   });
 
     /**
      * This Method creates on "#createButton" press a JSON which should be stored in the DB
@@ -93,7 +104,7 @@ $(document).ready(function(){
     /**
      * This Method creates the list of the ingredients on the show or copy or edit page
      *
-     * @requriements:   "#ingredients-tabel" (Table for the new lines of ingredients)
+     * @requriements:   "#ingredients-table" (Table for the new lines of ingredients)
      *                  "#ingredients-edit" or "#ingredients-show" (hidden input field for the JSON-String from the DB)
      * */
     if ($('#allIngredients-edit').val()) {
@@ -104,6 +115,7 @@ $(document).ready(function(){
             '<td><input type="text" name="amount" class="form-control" value="'+ element['amount']+'"></td>' +
             '<td>'+ generateSelect(element['unit']) + '</td>' +
             '<td><input type="text" name="ingredient" class="form-control" value="'+ element['ingredient']+'"></td>' +
+            '<td><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' +
             '</tr>');
         }
     }
