@@ -15,7 +15,7 @@
                             <h5 class="mb-1 text-primary font-weight-bold">{{$recipe->title}}</h5>
                         </div>
                         <div class="col-4">
-                            <small>Last update on: <span class="text-primary">{{$recipe->created_at}}</span> by <span class="text-primary">{{$recipe->user->name}}</span></small>
+                            <small>Last update on: <span class="text-primary">{{$recipe->updated_at}}</span> by <span class="text-primary">{{$recipe->user->name}}</span></small>
                         </div>
                     </div>
                 </a>

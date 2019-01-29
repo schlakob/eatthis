@@ -40,7 +40,7 @@
     <hr>
     <p>{{$recipe->description}}</p>
     <hr>
-    <small>Last update on: <span class="text-primary">{{$recipe->created_at}}</span> by <span class="text-primary">{{$recipe->user->name}}</span></small>
+    <small>Last update on: <span class="text-primary">{{$recipe->updated_at}}</span> by <span class="text-primary">{{$recipe->user->name}}</span></small>
     <hr>
     <div class="row">
     @if (!Auth::guest())
