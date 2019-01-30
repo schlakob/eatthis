@@ -8,6 +8,12 @@
             {{Form::label('title', 'Title:')}}
             {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
         </div>
+        <div class="form-group mb-3">
+            <span class="switch switch-sm">
+                {{Form::checkbox('private', '', true, ['type' => 'checkbox', 'class' => 'switch', 'id' => 'switch-sm'])}}
+                {{Form::label('switch-sm', 'Private')}}
+            </span>
+        </div>
         <div class="form-group">
             {{Form::label('ingredients', 'Ingredients (please type in the quantity for 1 person):')}}
             <table id="ingredients-table">

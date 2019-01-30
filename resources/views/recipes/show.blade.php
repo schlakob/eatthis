@@ -11,6 +11,12 @@
     </div>
     <h1 class="text-center font-weight-bold">{{$recipe->title}}</h1>
     <hr>
+    @if ($recipe->private)
+        <p class="text-center">< private ></p>
+    @else
+        <p class="text-center">< public ></p>
+    @endif
+    <hr>
     <input type="hidden" id="allIngredients-show" value="{{$recipe->ingredients}}" readonly>
     <div class="row">
         <div class="col-7">
@@ -27,7 +33,7 @@
                 <div class="card ">
                     <div class="card-header text-center"><h4>Calculator</h4></div>
                     <div class="card-body text-center">
-                        <p>Here you can calculate the portions for a specific amount of people, but is not functional right now (coming soon):</p>
+                        <p>Here you can calculate the portions for a specific amount of people:</p>
                         <div class="row justify-content-center">
                             <button class="btn btn-primary col-2 mr-3" id="addCalculatedPerson">+</button>
                             <input type="number" id="calculatedPersons" class="form-control col-2 text-center" value="1" readonly max="20" min="1">

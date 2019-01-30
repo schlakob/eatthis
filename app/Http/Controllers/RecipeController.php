@@ -25,7 +25,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::orderBy('updated_at', 'desc')->paginate(20);
+        $recipes = Recipe::where('private', '<>', '1')->orderBy('updated_at', 'desc')->paginate(20);
         return view('recipes/index', compact('recipes'));
     }
 
@@ -58,6 +58,7 @@ class RecipeController extends Controller
         $recipe->description = $request->input('description');
         $recipe->ingredients = $request->input('ingredients');
         $recipe->user_id = auth()->user()->id;
+        $recipe->private = $request->has('private');
         $recipe->save();
 
         return redirect('/dashboard')->with('success', 'Added a new Recipe');
@@ -72,7 +73,11 @@ class RecipeController extends Controller
     public function show($id)
     {
         $recipe = Recipe::find($id);
+        if ($recipe->private == 1  && auth()->user()->id !== $recipe->user_id) {
+            return redirect('/recipes')->with('error', 'That is not your Recipe');
+        }
         return view('recipes/show', compact('recipe'));
+
     }
 
     /**
@@ -112,6 +117,7 @@ class RecipeController extends Controller
         $recipe->description = $request->input('description');
         $recipe->ingredients = $request->input('ingredients');
         $recipe->user_id = auth()->user()->id;
+        $recipe->private = $request->has('private');
         $recipe->save();
 
         $redirectPage = '/recipes'.'/'.$id;
