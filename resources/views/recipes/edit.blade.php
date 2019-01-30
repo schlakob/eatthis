@@ -25,5 +25,6 @@
         </div>
         {{Form::hidden('_method', 'PUT')}}
         {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
+        <a href="javascript:history.back()" class="btn btn-danger">Cancel</a>
     {!! Form::close() !!}
 @endsection

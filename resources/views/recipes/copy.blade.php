@@ -3,6 +3,7 @@
 @section('content')
     <h1 class="text-center font-weight-bold mb-2">Copy the recipe</h1>
     <hr>
+    <input type="hidden" id="allIngredients-edit" value="{{$recipe->ingredients}}" readonly>
     {!! Form::open(['action' => 'RecipeController@store', 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::label('title', 'Title:')}}
@@ -23,5 +24,6 @@
                 {{Form::textarea('description', $recipe->description, ['class' => 'form-control', 'placeholder' => 'Description'])}}
         </div>
         {{Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
+        <a href="javascript:history.back()" class="btn btn-danger">Cancel</a>
     {!! Form::close() !!}
 @endsection

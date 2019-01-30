@@ -47958,11 +47958,19 @@ var app = new Vue({
 });
 $(document).ready(function () {
   /**
+   * Here all textareas get a editor function
+   * */
+  tinymce.init({
+    selector: 'textarea',
+    menubar: false
+  });
+  /**
    * This Method creates on "#addBuuton" press a new line for ingredients
    *
    * @requriements:    "#addbutton" (Button which needs to be clicked)
    *                  "#ingredients-tabel" (Table for the new line of ingredients)(at least one tr required in table)
    * */
+
   $('#addButton').click(function () {
     $('#ingredients-table tr:last').after('<tr class="row">' + '<td class="col-3"><input type="number" name="amount" step="0.1" placeholder="Amount" class="form-control"></td>' + '<td class="col-3">' + generateSelect('none') + '</td>' + '<td class="col-5"><input type="text" name="ingredient" placeholder="Ingredient" class="form-control"></td>' + '<td class="col-1"><button type="button" class="btn btn-danger deleteIngredientLine ml-1">-</button></td>' + '</tr>');
   });
@@ -48059,24 +48067,28 @@ $(document).ready(function () {
 
 
   $('.deleteButton').click(function (e) {
-    e.preventDefault();
-    var id = $(this).find('.recipeId').val();
-    console.dir(id);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      type: 'DELETE',
-      url: "recipes/delete/" + id,
-      data: {
-        "id": id
-      },
-      success: function success(data) {
-        $('#table-row-' + id).remove();
-      }
-    });
+    var confirm = window.confirm("Sure you want to delete this recipe?");
+
+    if (confirm) {
+      e.preventDefault();
+      var id = $(this).find('.recipeId').val();
+      console.dir(id);
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        type: 'DELETE',
+        url: "recipes/delete/" + id,
+        data: {
+          "id": id
+        },
+        success: function success(data) {
+          $('#table-row-' + id).remove();
+        }
+      });
+    }
   });
   /**
    * This Methods increses or decreses the shown quantity of the ingredients

@@ -23,5 +23,6 @@
             {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description'])}}
         </div>
         {{Form::submit('Create', ['class' => 'btn btn-primary', 'id' => 'createButton'])}}
+        <a href="javascript:history.back()" class="btn btn-danger">Cancel</a>
     {!! Form::close() !!}
 @endsection

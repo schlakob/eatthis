@@ -34,6 +34,10 @@ const app = new Vue({
 
 $(document).ready(function(){
 
+    /**
+     * Here all textareas get a editor function
+     * */
+    tinymce.init({ selector:'textarea', menubar: false });
 
     /**
      * This Method creates on "#addBuuton" press a new line for ingredients
@@ -142,24 +146,27 @@ $(document).ready(function(){
      *                  "'#table-row-'+ id" (to remove the tablerow of the recipe)
      * */
     $('.deleteButton').click( function(e) {
-        e.preventDefault();
-        var id = $(this).find('.recipeId').val();
-        console.dir(id);
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-        $.ajax({
-            type: 'DELETE',
-            url: "recipes/delete/" +  id,
-            data: {
-                "id": id
-            },
-            success: function (data) {
-                $('#table-row-'+ id).remove();
-            }
-        });
+        var confirm = window.confirm("Sure you want to delete this recipe?");
+        if (confirm) {
+            e.preventDefault();
+            var id = $(this).find('.recipeId').val();
+            console.dir(id);
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: 'DELETE',
+                url: "recipes/delete/" +  id,
+                data: {
+                    "id": id
+                },
+                success: function (data) {
+                    $('#table-row-'+ id).remove();
+                }
+            });
+        }
    });
 
     /**
