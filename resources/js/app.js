@@ -150,7 +150,6 @@ $(document).ready(function(){
         if (confirm) {
             e.preventDefault();
             var id = $(this).find('.recipeId').val();
-            console.dir(id);
             $.ajaxSetup({
                 headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
