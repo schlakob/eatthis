@@ -12,9 +12,6 @@
             <p>Now don´t waste your time and login or register:</p>
             <a href="/login" class="btn btn-primary btn-block">Login</a>
             <a href="/register" class="btn btn-secondary btn-block">Register</a>
-        @else
-            <p>Here you can easy logout:</p>
-            <a href="/logout" class="btn btn-primary btn-block">Logout</a>
         @endif
 
     </div>
